@@ -9,6 +9,8 @@ const AWS = require('aws-sdk');
 
 const { MongoClient } = require('mongodb');
 
+const sha1 = require('sha1')
+
 const PORT = parseInt(process.argv[2]) || parseInt(process.env.PORT) || 3000
 
 const app = express()
@@ -121,13 +123,14 @@ app.post('/login', (req, resp) => {
     
 	const username = req.body.username
 	const password = req.body.password
-	serverPassword = ""
-	errorMsg = ""
+	
+	const shaPassword = sha1(password)
 
 	console.log('username: ', username)
 	console.log('password: ', password)
+	console.log('Sha password: ', shaPassword)
 
-	executeGetLoginDetails([username, password]).then((results) => {
+	executeGetLoginDetails([username, shaPassword]).then((results) => {
 		
 		if(results.length > 0){
 			console.log('successful login')
@@ -152,8 +155,9 @@ app.post('/upload', upload.single('upload'), (req, resp) => {
 	console.info('>>> req.file: ', req.file)
 	const username = req.body.username
 	const password = req.body.password
+	const shaPassword = sha1(password)
 
-	executeGetLoginDetails([username, password]).then((results) => {
+	executeGetLoginDetails([username, shaPassword]).then((results) => {
 		if(results.length > 0){
 			console.log('login verified')
 			console.log('perform file upload steps here')
