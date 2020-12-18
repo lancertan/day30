@@ -20,12 +20,12 @@ app.use(morgan('combined'))
 
 //S3
 const s3 = new AWS.S3({
-    endpoint: new AWS.Endpoint('sfo2.digitaloceanspaces.com'),
+    endpoint: new AWS.Endpoint(process.env.AWS_ENDPOINT),
     accessKeyId: process.env.ACCESS_KEY, 
 	secretAccessKey: process.env.SECRET_ACCESS_KEY 
 })
 
-const AWS_S3_BUCKET_NAME = process.env.AWS_S3_BUCKET_NAME //|| 'lancertan'
+const AWS_S3_BUCKET_NAME = process.env.AWS_S3_BUCKET_NAME
 
 const upload = multer({
     dest: process.env.TMP_DIR || '/opt/tmp/uploads'
