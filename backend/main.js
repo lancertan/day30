@@ -192,9 +192,8 @@ app.post('/upload', upload.single('upload'), (req, resp) => {
 
 })
 })
-//console.log(`${__dirname}\\frontend`)
+
 // Serve angular
-//console.log(__dirname, '/frontend')
 app.use(express.static(`${__dirname}\\frontend`));
 
 
