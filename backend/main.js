@@ -3,11 +3,11 @@ const express = require('express')
 const cors = require('cors')
 const mysql = require('mysql2/promise')
 
-const multer = require('multer');
-const fs = require('fs');
-const AWS = require('aws-sdk');
+const multer = require('multer')
+const fs = require('fs')
+const AWS = require('aws-sdk')
 
-const { MongoClient } = require('mongodb');
+const { MongoClient } = require('mongodb')
 
 const sha1 = require('sha1')
 
@@ -126,9 +126,9 @@ app.post('/login', (req, resp) => {
 	
 	const shaPassword = sha1(password)
 
-	console.log('username: ', username)
-	console.log('password: ', password)
-	console.log('Sha password: ', shaPassword)
+	//console.log('username: ', username)
+	//console.log('password: ', password)
+	//console.log('Sha password: ', shaPassword)
 
 	executeGetLoginDetails([username, shaPassword]).then((results) => {
 		
@@ -151,8 +151,8 @@ app.post('/login', (req, resp) => {
 //POST /upload file upload
 app.post('/upload', upload.single('upload'), (req, resp) => {
     
-    console.info('>>> req.body: ', req.body)
-	console.info('>>> req.file: ', req.file)
+    //console.info('>>> req.body: ', req.body)
+	//console.info('>>> req.file: ', req.file)
 	const username = req.body.username
 	const password = req.body.password
 	const shaPassword = sha1(password)
